@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.itcast.ssm.mapper.WXAccountMapper" >
+
+	<!-- sql片断 -->
+	<sql id="query_wxaccount_where">
+		<if test="wxAccountCustom!=null">
+			<if test="wxAccountCustom.nickname!=null and wxAccountCustom.nickname!=''">
+				nickname like '%${wxAccountCustom.nickname}%'
+			</if>
+		</if>
+	</sql>
+
+	<!-- 微信账号列表查询 -->
+	<!-- parameterType建议传入包装对象（包装了查询条件） resultType建议使用扩展对象-->
+	<select id="findWXAccountList" parameterType="cn.itcast.ssm.po.WXAccountVo" resultType="cn.itcast.ssm.po.WXAccountCustom">
+		select * from wxaccount
+		<where>
+			<include refid="query_wxaccount_where"></include>
+		</where>
+		
+	</select>
+</mapper>
