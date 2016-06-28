@@ -20,4 +20,17 @@
 		</where>
 		
 	</select>
+	
+	<select id="isBinded" parameterType="java.lang.String" resultType="int">
+		select count(0) num from wxaccount a, wxacc_orguser_relation r where a.unionid = r.unionid and a.unionid=#{unionid}
+	</select>
+	
+	<select id="getOrgidByUniqueid" parameterType="java.lang.String" resultType="java.lang.String">
+		select id from orguser where uniqueid = #{uniqueid}
+	</select>
+	
+	<!-- #{speId,jdbcType=INTEGER} -->
+	<select id="getOrgidByUseridAndUniqueid" parameterType="java.util.Map" resultType="java.lang.String">
+		select id from orguser where userid = #{userid} and uniqueid = #{uniqueid}
+	</select>
 </mapper>
